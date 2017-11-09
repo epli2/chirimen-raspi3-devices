@@ -40,8 +40,6 @@ GroveADC.prototype = {
           var a = ((v & 0x0f) << 8) & 0xfff;
           var b = v >> 8;
           var value = (a | b);
-          console.log(value);
-          console.log(value * 3.0 * 2/4096 + " V");
           resolve(value);
         }, (err) => {
           console.log("GroveADC.read Error: " + err.message);

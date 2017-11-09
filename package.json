@@ -1,0 +1,12 @@
+{
+  "name": "chirimen-raspi3-devices",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "description": "Remote CHIRIMEN devices",
+  "scripts": {
+    "start": "live-server"
+  },
+  "dependencies": {
+    "live-server": "^1.2.0"
+  }
+}

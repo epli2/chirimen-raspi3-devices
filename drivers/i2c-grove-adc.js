@@ -23,6 +23,7 @@ GroveADC.prototype = {
       this.i2cPort.open(this.slaveAddress).then((i2cSlave) => {
         this.i2cSlave = i2cSlave;
         this.i2cSlave.write8(GROVE_ADC_REGS.ADDR_CONFIG, 0x20);
+        this.i2cSlave.writeByte(GROVE_ADC_REGS.ADDR_RESULT);
         console.log("init ok:"+this.i2cSlave);
         resolve();
       }, (err) => {
@@ -36,9 +37,10 @@ GroveADC.prototype = {
       if (this.i2cSlave === null) {
         reject("i2cSlave Address does'nt yet open!");
       } else {
-        this.i2cSlave.read16(GROVE_ADC_REGS.ADDR_RESULT).then((v) => {
-          var a = ((v & 0x0f) << 8) & 0xfff;
-          var b = v >> 8;
+        this.i2cSlave.readBytes(2).then((v) => {
+          console.log(v[0], v[1]);
+          var a = ((v[0] & 0x0f) << 8) & 0xfff;
+          var b = v[1];
           var value = (a | b);
           resolve(value);
         }, (err) => {
